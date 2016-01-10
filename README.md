@@ -103,7 +103,7 @@ _TODO:_ bundles
 
 ## LICENSE
 
-[MIT](https://github.com/gulp-flow/gulp-flow/blob/master/LICENSE) (c) 2015, Nicolas Tallefourtane.
+[MIT](https://github.com/gulp-flow/gulp-flow/blob/master/LICENSE) (c) 2016, Nicolas Tallefourtane.
 
 
 ## Author
