@@ -27,6 +27,8 @@ let flow = {
     ifElse  : require('gulp-if-else'),
     rename  : require('gulp-rename'),
     replace : require('gulp-replace'),
+    newer   : require('gulp-newer'),
+    using   : require('gulp-using'),
     util    : require('gulp-util')
   },
 

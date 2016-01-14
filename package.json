@@ -28,8 +28,10 @@
     "gulp-concat": "^2.6.0",
     "gulp-header": "^1.7.1",
     "gulp-if-else": "^1.0.3",
+    "gulp-newer": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
+    "gulp-using": "^0.1.0",
     "gulp-util": "^3.0.7",
     "lazypipe": "^1.0.1",
     "lodash": "^3.10.1"
