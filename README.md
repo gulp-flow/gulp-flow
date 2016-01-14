@@ -52,15 +52,11 @@ let flow = require('gulp-flow');
 
 ### Command
 
-To be able to support natively the modern JS features (ES6 / ES7) in your tasks scripts (without transpiler).
+If you are a _Unix_ user, to be able to support natively the modern JS features (ES6 / ES7) in your tasks scripts (without transpiler), you can add in your `.bashrc` (or `.bash_aliases`) file this alias:
 
 ```sh
-gulp --es_staging --harmony_destructuring
-```
-
-or the shortcut command:
-```sh
-gulpflow
+# run Gulp with some features of ES6/ES7
+alias gulp='node --es_staging --harmony_destructuring `which gulp`'
 ```
 
 Now you can write the modern JS (supported by Node.js) in your _gulpfile.js_:
@@ -75,11 +71,11 @@ _TODO:_ `cfg`
 #### Environment
 
 ```sh
-gulpflow --type=development
+gulp --type=development
 ```
 or
 ```sh
-NODE_ENV=development gulpflow
+NODE_ENV=development gulp
 ```
 
 _gulpfile.js_
