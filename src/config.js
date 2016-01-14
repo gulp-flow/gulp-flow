@@ -17,6 +17,12 @@ let cfg = {
   srcDir    : 'src',
   publicDir : 'public',
   distDir   : 'dist',
+  patterns: {
+    ignore: [
+      '!src/**/_*/*',
+      '!src/_*/**/*'
+    ]
+  },
   localPort : process.env.SERVE_PORT || 8080,
   get env() {
     return process.env.NODE_ENV || require('./').gp.util.env.type;
