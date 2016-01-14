@@ -1,6 +1,6 @@
 {
   "name": "gulp-flow",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "gulp-flow helps to organize and re-use a collection of tasks.",
   "main": "./src/index.js",
   "keywords": [
@@ -42,8 +42,5 @@
   },
   "engines": {
     "node": ">= 4"
-  },
-  "bin": {
-    "gulpflow": "./bin/gulpflow"
   }
 }
