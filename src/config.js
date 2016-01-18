@@ -11,6 +11,7 @@
 'use strict';
 
 let path = require('path');
+let EnvList = require('envlist');
 
 let cfg = {
   freezeEnv : false,
@@ -25,8 +26,9 @@ let cfg = {
     ]
   },
   localPort : process.env.SERVE_PORT || 8080,
+  envList: new EnvList(),
   get env() {
-    return process.env.NODE_ENV || require('./').gp.util.env.type;
+    return this.envList.env;
   },
   set env(value) {
     if(this.freezeEnv) {
@@ -37,8 +39,9 @@ let cfg = {
       );
     }
 
-    process.env.NODE_ENV = value;
-    require('./').gp.util.env.type = value;
+
+    process.env.APP_ENV = value;
+    this.envList.consolidate();
   },
   get banner() {
     let pkg = this.pkg;
@@ -70,6 +73,35 @@ let cfg = {
 
     return banner;
   }
+};
+
+cfg.envList.resolveAppEnv = function resolveAppEnv() {
+  cfg.envList.env = process.env.APP_ENV
+    || process.env.NODE_ENV
+    || require('./').gp.util.env.type
+  ;
+
+  if(cfg.envList.env && cfg.envList.has(cfg.envList.env)) {
+    return cfg.envList;
+  }
+
+  throw new ReferenceError('Environment not found.');
+};
+
+cfg.envList.consolidate = function consolidate() {
+  let current;
+  if(!cfg.envList.env) {
+    cfg.envList.resolveAppEnv();
+  }
+
+  if(process && process.env) {
+    current = cfg.envList.envs[cfg.envList.env];
+    process.env.APP_ENV = current.APP_ENV;
+    process.env.NODE_ENV = current.NODE_ENV;
+    require('./').gp.util.env.type = current.NODE_ENV;
+  }
+
+  return cfg.envList;
 };
 
 module.exports = cfg;
