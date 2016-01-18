@@ -50,14 +50,14 @@ let flow = {
   */
 _.mixin({
   mergeRecursive: function mergeRecursive(obj, from) {
-    var ln = arguments.length;
+    let ln = arguments.length;
 
     if (ln < 2) {
       throw new Error('There should be at least 2 arguments passed to _.mergeRecursive()');
     }
 
-    for (var i = 1; i < ln; i++) {
-      for (var p in arguments[i]) {
+    for (let i = 1; i < ln; i++) {
+      for (let p in arguments[i]) {
         if (obj[p] && typeof obj[p] === 'object') {
           obj[p] = _.mergeRecursive(obj[p], arguments[i][p]);
         } else {
