@@ -91,12 +91,15 @@ _gulpfile.js_
 // cfg.env output: dev
 console.log(cfg.env);
 
-// cfg.NODE_ENV output: development
+// NODE_ENV output: development
 // Why? Because it's a convention of the Node.js sphere ;)
 // See envlist for more details
-console.log(cfg.NODE_ENV);
+console.log(process.env.NODE_ENV);
+console.log(cfg.envList.NODE_ENV);
 ```
 
+Also you can ensure the environment directly in your tasks with `cfg.envList.ensure()`
+or the shortcut `flow.ensureEnv()`.
 
 ### Gulp plugins
 

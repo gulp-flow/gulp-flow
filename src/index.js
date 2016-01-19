@@ -89,5 +89,11 @@ _.mixin(
 
 flow._ = _;
 
+// shortcut of `flow.cfg.envList.ensure`
+flow.ensureEnv = function ensureEnv(appEnvName) {
+  flow.cfg.envList.ensure(appEnvName);
+  return flow;
+};
+
 
 module.exports = flow;
