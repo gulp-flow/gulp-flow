@@ -15,7 +15,6 @@ let path = require('path');
 let EnvList = require('envlist');
 
 let cfg = {
-  freezeEnv      : false,
   pkg            : require(path.join(path.resolve(), 'package.json')),
   srcDir         : 'src',
   publicDir      : 'public',
@@ -39,17 +38,10 @@ let cfg = {
     return this.envList.env;
   },
   set env(value) {
-    if(this.freezeEnv) {
-      throw new Error(
-        'Cannot replace the "env" value. ' +
-        'Because the "env" property is configured in read only. ' +
-        '(see flow.cfg.freezeEnv).'
-      );
-    }
-
-
-    process.env.APP_ENV = value;
-    this.envList.consolidate();
+    throw new Error(
+      'Cannot replace the "env" value (it\'s read-only). ' +
+      'Use flow.ensureEnv() or flow.cfg.envList.'
+    );
   },
   get banner() {
     let pkg = this.pkg;
