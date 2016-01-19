@@ -24,7 +24,7 @@
   "bugs": "https://github.com/gulp-flow/gulp-flow/issues",
   "dependencies": {
     "del": "^2.2.0",
-    "envlist": "^1.0.0",
+    "envlist": "^1.1.0",
     "event-stream": "^3.3.2",
     "gulp-concat": "^2.6.0",
     "gulp-header": "^1.7.1",
