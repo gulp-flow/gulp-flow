@@ -70,18 +70,31 @@ _TODO:_ `cfg`
 
 #### Environment
 
+`gulp-flow` use the [envlist](https://github.com/Nicolab/envlist) module to finely manage and consolidate the environments.
+
+See [envlist](https://github.com/Nicolab/envlist) for more details.
+
 ```sh
-gulp --type=development
+gulp --type=dev
 ```
 or
 ```sh
-NODE_ENV=development gulp
+APP_ENV=dev gulp
+```
+or
+```sh
+NODE_ENV=dev gulp
 ```
 
 _gulpfile.js_
 ```js
-// output: development
+// cfg.env output: dev
 console.log(cfg.env);
+
+// cfg.NODE_ENV output: development
+// Why? Because it's a convention of the Node.js sphere ;)
+// See envlist for more details
+console.log(cfg.NODE_ENV);
 ```
 
 
