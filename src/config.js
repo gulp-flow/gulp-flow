@@ -19,7 +19,7 @@ let cfg = {
   srcDir         : 'src',
   publicDir      : 'public',
   publicAssetsDir: 'public/assets',
-  publicCSSDir   : 'public/assets/css',
+  publicCssDir   : 'public/assets/css',
   publicImgDir   : 'public/assets/img',
   publicJsDir    : 'public/assets/js',
   distDir        : 'dist',
