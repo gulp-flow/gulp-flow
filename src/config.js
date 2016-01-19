@@ -10,18 +10,26 @@
 
 'use strict';
 
+let filesSrc;
 let path = require('path');
 let EnvList = require('envlist');
 
 let cfg = {
-  freezeEnv : false,
-  pkg       : require(path.join(path.resolve(), 'package.json')),
-  srcDir    : 'src',
-  publicDir : 'public',
-  distDir   : 'dist',
+  freezeEnv      : false,
+  pkg            : require(path.join(path.resolve(), 'package.json')),
+  srcDir         : 'src',
+  publicDir      : 'public',
+  publicAssetsDir: 'public/assets',
+  publicCSSDir   : 'public/assets/css',
+  publicImgDir   : 'public/assets/img',
+  publicJsDir    : 'public/assets/js',
+  distDir        : 'dist',
   patterns: {
     ignore: [
+      '!src/**/_*',
       '!src/**/_*/*',
+      '!src/_*/',
+      '!src/_*/**',
       '!src/_*/**/*'
     ]
   },
@@ -75,6 +83,11 @@ let cfg = {
   }
 };
 
+
+/*----------------------------------------------------------------------------*\
+  Env
+\*----------------------------------------------------------------------------*/
+
 cfg.envList.resolveAppEnv = function resolveAppEnv() {
   cfg.envList.env = process.env.APP_ENV
     || process.env.NODE_ENV
@@ -102,6 +115,18 @@ cfg.envList.consolidate = function consolidate() {
   }
 
   return cfg.envList;
+};
+
+
+/*----------------------------------------------------------------------------*\
+  Files
+\*----------------------------------------------------------------------------*/
+
+filesSrc = [cfg.srcDir + '/**/*'].concat(cfg.patterns.ignore);
+
+cfg.files = {
+  src : filesSrc,
+  srcWatch: filesSrc
 };
 
 module.exports = cfg;
