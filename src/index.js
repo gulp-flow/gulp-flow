@@ -10,15 +10,73 @@
 
 'use strict';
 
+let filesSrc;
 let _ = require('lodash');
+let path = require('path');
+let EnvList = require('envlist');
 
 let flow = {
-  cfg      : require('./config'),
+  envList: new EnvList(),
 
-  // stream handlers
-  lazypipe : require('lazypipe'),
-  del      : require('del'),
-  es       : require('event-stream'),
+  cfg : {
+    pkg            : require(path.join(path.resolve(), 'package.json')),
+    srcDir         : 'src',
+    publicDir      : 'public',
+    publicAssetsDir: 'public/assets',
+    publicCssDir   : 'public/assets/css',
+    publicImgDir   : 'public/assets/img',
+    publicJsDir    : 'public/assets/js',
+    distDir        : 'dist',
+    patterns: {
+      ignore: [
+        '!src/**/_*',
+        '!src/**/_*/*',
+        '!src/_*/',
+        '!src/_*/**',
+        '!src/_*/**/*'
+      ]
+    },
+    localPort : process.env.SERVE_PORT || 8080,
+    get env() {
+      return flow.envList.env;
+    },
+    set env(value) {
+      throw new Error(
+        'Cannot replace the "env" value (it\'s read-only). ' +
+        'Use flow.ensureEnv() or flow.envList.'
+      );
+    },
+    get banner() {
+      let pkg = this.pkg;
+      let banner = '/*! '+ pkg.name + ' v'+ pkg.version + ' | ';
+
+      if(typeof pkg.license === 'string') {
+        banner += pkg.license;
+      }
+      // old package.json
+      else if(typeof pkg.license === 'object') {
+        banner += pkg.license.type;
+      }
+      // old package.json
+      else if(pkg.licenses && pkg.licenses[0]) {
+        banner += pkg.licenses[0].type;
+      }
+
+      banner += ' (c) '+ (new Date().getFullYear());
+
+      if(pkg.author && pkg.author.name) {
+        banner += ' ' + pkg.author.name;
+      }
+
+      if(pkg.homepage) {
+        banner += ' - ' + pkg.homepage;
+      }
+
+      banner += ' */';
+
+      return banner;
+    }
+  },
 
   // Gulp plugins
   gp: {
@@ -32,8 +90,17 @@ let flow = {
     util    : require('gulp-util')
   },
 
-  // lazypipe
-  pipes: {}
+  // pipelines (lazypipe)
+  pipes: {},
+
+  // utilities
+  utils: {
+    _,
+    // stream handlers
+    lazypipe : require('lazypipe'),
+    del      : require('del'),
+    es       : require('event-stream')
+  }
 };
 
 
@@ -87,11 +154,55 @@ _.mixin(
   { chain: false }
 );
 
-flow._ = _;
+/*----------------------------------------------------------------------------*\
+  Env
+\*----------------------------------------------------------------------------*/
+
+flow.envList.resolveAppEnv = function resolveAppEnv() {
+  flow.envList.env = process.env.APP_ENV
+    || process.env.NODE_ENV
+    || flow.gp.util.env.type
+  ;
+
+  if(flow.envList.env && flow.envList.has(flow.envList.env)) {
+    return flow.envList;
+  }
+
+  throw new ReferenceError('Environment not found.');
+};
+
+flow.envList.consolidate = function consolidate() {
+  let current;
+
+  if(!flow.envList.env) {
+    flow.envList.resolveAppEnv();
+  }
+
+  if(process && process.env) {
+    current = flow.envList.envs[flow.envList.env];
+    process.env.APP_ENV = current.APP_ENV;
+    process.env.NODE_ENV = current.NODE_ENV;
+    flow.gp.util.env.type = current.NODE_ENV;
+  }
+
+  return flow.envList;
+};
+
+
+/*----------------------------------------------------------------------------*\
+  Files
+\*----------------------------------------------------------------------------*/
+
+filesSrc = [flow.cfg.srcDir + '/**/*'].concat(flow.cfg.patterns.ignore);
+
+flow.cfg.files = {
+  src : filesSrc,
+  srcWatch: filesSrc
+};
 
 // shortcut of `flow.cfg.envList.ensure`
 flow.ensureEnv = function ensureEnv(appEnvName) {
-  flow.cfg.envList.ensure(appEnvName);
+  flow.envList.ensure(appEnvName);
   return flow;
 };
 

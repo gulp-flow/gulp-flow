@@ -61,7 +61,7 @@ alias gulp='node --es_staging --harmony_destructuring `which gulp`'
 
 Now you can write the modern JS (supported by Node.js) in your _gulpfile.js_:
 ```js
-let {cfg, gp, pipes} = require('gulp-flow');
+let {cfg, gp, pipes, utils, envList} = require('gulp-flow');
 ```
 
 ### Config
@@ -72,7 +72,7 @@ _TODO:_ `cfg`
 
 `gulp-flow` use the [envlist](https://github.com/Nicolab/envlist) module to finely manage and consolidate the environments.
 
-See [envlist](https://github.com/Nicolab/envlist) for more details.
+See [envlist](https://github.com/Nicolab/envlist) module for more details.
 
 ```sh
 gulp --type=dev
@@ -93,12 +93,12 @@ console.log(cfg.env);
 
 // NODE_ENV output: development
 // Why? Because it's a convention of the Node.js sphere ;)
-// See envlist for more details
+// See envlist module for more details
 console.log(process.env.NODE_ENV);
-console.log(cfg.envList.NODE_ENV);
+console.log(flow.envList.NODE_ENV);
 ```
 
-Also you can ensure the environment directly in your tasks with `cfg.envList.ensure()`
+Also you can ensure the environment directly in your tasks with `flow.envList.ensure()`
 or the shortcut `flow.ensureEnv()`.
 
 ### Gulp plugins
@@ -112,6 +112,10 @@ _TODO:_ `pipes`
 ### Bundles
 
 _TODO:_ bundles
+
+### Utils
+
+_TODO:_ utils
 
 ## LICENSE
 
