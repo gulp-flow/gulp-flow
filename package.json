@@ -1,6 +1,6 @@
 {
   "name": "gulp-flow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "gulp-flow helps to organize and re-use a collection of tasks.",
   "main": "./src/index.js",
   "keywords": [
@@ -35,7 +35,7 @@
     "gulp-using": "^0.1.0",
     "gulp-util": "^3.0.7",
     "lazypipe": "^1.0.1",
-    "lodash": "^3.10.1"
+    "lodash": "^4.2.1"
   },
   "devDependencies": {
     "gulp": "github:gulpjs/gulp#4.0"
