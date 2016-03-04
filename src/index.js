@@ -99,7 +99,8 @@ let flow = {
     // stream handlers
     lazypipe : require('lazypipe'),
     del      : require('del'),
-    es       : require('event-stream')
+    es       : require('event-stream'),
+    through  : require('through2')
   }
 };
 
