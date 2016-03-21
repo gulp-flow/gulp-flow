@@ -10,7 +10,7 @@
 
 'use strict';
 
-let filesSrc;
+let filesSrc, customBanner;
 let _ = require('lodash');
 let path = require('path');
 let EnvList = require('envlist');
@@ -47,8 +47,18 @@ let flow = {
       );
     },
     get banner() {
-      let pkg = this.pkg;
-      let banner = '/*! '+ pkg.name + ' v'+ pkg.version + ' | ';
+      let pkg, banner;
+
+      if(customBanner) {
+        if(typeof customBanner === 'string') {
+          return customBanner;
+        }
+
+        return customBanner();
+      }
+
+      pkg = this.pkg;
+      banner = '/*! '+ pkg.name + ' v'+ pkg.version + ' | ';
 
       if(typeof pkg.license === 'string') {
         banner += pkg.license;
@@ -75,6 +85,9 @@ let flow = {
       banner += ' */';
 
       return banner;
+    },
+    set banner(banner) {
+      customBanner = banner;
     }
   },
 
