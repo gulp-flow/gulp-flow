@@ -94,6 +94,7 @@ let flow = {
   // Gulp plugins
   gp: {
     concat  : require('gulp-concat'),
+    hash    : require('gulp-hash-filename'),
     header  : require('gulp-header'),
     ifElse  : require('gulp-if-else'),
     rename  : require('gulp-rename'),

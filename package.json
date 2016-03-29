@@ -1,6 +1,6 @@
 {
   "name": "gulp-flow",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "gulp-flow helps to organize and re-use a collection of tasks.",
   "main": "./src/index.js",
   "keywords": [
@@ -27,6 +27,7 @@
     "envlist": "^1.1.0",
     "event-stream": "^3.3.2",
     "gulp-concat": "^2.6.0",
+    "gulp-hash-filename": "^1.0.1",
     "gulp-header": "^1.7.1",
     "gulp-if-else": "^1.0.3",
     "gulp-newer": "^1.1.0",
