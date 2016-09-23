@@ -14,12 +14,14 @@ let filesSrc, customBanner;
 let _ = require('lodash');
 let path = require('path');
 let EnvList = require('envlist');
+let rootPath = path.resolve();
 
 let flow = {
   envList: new EnvList(),
 
   cfg : {
-    pkg            : require(path.join(path.resolve(), 'package.json')),
+    rootPath       : rootPath,
+    pkg            : require(path.join(rootPath, 'package.json')),
     srcDir         : 'src',
     publicDir      : 'public',
     publicAssetsDir: 'public/assets',
