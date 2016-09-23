@@ -16,6 +16,8 @@ let path = require('path');
 let EnvList = require('envlist');
 let rootPath = path.resolve();
 
+let ignorePatterns;
+
 let flow = {
   envList: new EnvList(),
 
@@ -30,13 +32,26 @@ let flow = {
     publicJsDir    : 'public/assets/js',
     distDir        : 'dist',
     patterns: {
-      ignore: [
-        '!src/**/_*',
-        '!src/**/_*/*',
-        '!src/_*/',
-        '!src/_*/**',
-        '!src/_*/**/*'
-      ]
+      get ignore() {
+        let srcDir;
+
+        if (ignorePatterns) {
+          return ignorePatterns;
+        }
+
+        // init
+        srcDir = flow.cfg.srcDir;
+
+        ignorePatterns = [
+          '!' + srcDir + '/**/_*',
+          '!' + srcDir + '/**/_*/*',
+          '!' + srcDir + '/_*/',
+          '!' + srcDir + '/_*/**',
+          '!' + srcDir + '/_*/**/*'
+        ];
+
+        return ignorePatterns;
+      }
     },
     localPort : process.env.SERVE_PORT || 8080,
     get env() {
