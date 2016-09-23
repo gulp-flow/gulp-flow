@@ -51,6 +51,11 @@ let flow = {
         ];
 
         return ignorePatterns;
+      },
+      set ignore(value) {
+        throw new Error(
+          'Cannot replace the "ignore" value (use the Array methods instead).'
+        );
       }
     },
     localPort : process.env.SERVE_PORT || 8080,
