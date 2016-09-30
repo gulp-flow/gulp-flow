@@ -234,7 +234,7 @@ filesSrc = [flow.cfg.srcDir + '/**/*'].concat(flow.cfg.patterns.ignore);
 
 flow.cfg.files = {
   src : Object.assign({}, filesSrc),
-  srcWatch: Object.assign({}, filesSrc);
+  srcWatch: Object.assign({}, filesSrc)
 };
 
 // shortcut of `flow.cfg.envList.ensure`
