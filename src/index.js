@@ -233,8 +233,8 @@ flow.envList.consolidate = function consolidate() {
 filesSrc = [flow.cfg.srcDir + '/**/*'].concat(flow.cfg.patterns.ignore);
 
 flow.cfg.files = {
-  src : filesSrc,
-  srcWatch: filesSrc
+  src : Object.assign({}, filesSrc),
+  srcWatch: Object.assign({}, filesSrc);
 };
 
 // shortcut of `flow.cfg.envList.ensure`
