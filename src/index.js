@@ -71,8 +71,8 @@ let flow = {
     get banner() {
       let pkg, banner;
 
-      if(customBanner) {
-        if(typeof customBanner === 'string') {
+      if (customBanner) {
+        if (typeof customBanner === 'string') {
           return customBanner;
         }
 
@@ -82,25 +82,25 @@ let flow = {
       pkg = this.pkg;
       banner = '/*! '+ pkg.name + ' v'+ pkg.version + ' | ';
 
-      if(typeof pkg.license === 'string') {
+      if (typeof pkg.license === 'string') {
         banner += pkg.license;
       }
       // old package.json
-      else if(typeof pkg.license === 'object') {
+      else if (typeof pkg.license === 'object') {
         banner += pkg.license.type;
       }
       // old package.json
-      else if(pkg.licenses && pkg.licenses[0]) {
+      else if (pkg.licenses && pkg.licenses[0]) {
         banner += pkg.licenses[0].type;
       }
 
       banner += ' (c) '+ (new Date().getFullYear());
 
-      if(pkg.author && pkg.author.name) {
+      if (pkg.author && pkg.author.name) {
         banner += ' ' + pkg.author.name;
       }
 
-      if(pkg.homepage) {
+      if (pkg.homepage) {
         banner += ' - ' + pkg.homepage;
       }
 
@@ -119,6 +119,7 @@ let flow = {
     hash    : require('gulp-hash-filename'),
     header  : require('gulp-header'),
     ifElse  : require('gulp-if-else'),
+    tap     : require('gulp-tap'),
     rename  : require('gulp-rename'),
     replace : require('gulp-replace'),
     newer   : require('gulp-newer'),
@@ -148,12 +149,12 @@ let flow = {
  /**
   * Merge recursive.
   *
-  * @param {object|array} obj       Object that receives the value from `from`
-  * @param {...object|array} from   One or more objects to merge in `obj`.
+  * @param {object|array} obj       Object that receives the value from `other`
+  * @param {...object|array} other   One or more objects to merge in `obj`.
   * @return {object} `obj` merged
   */
 _.mixin({
-  mergeRecursive: function mergeRecursive(obj, from) {
+  mergeRecursive: function mergeRecursive(obj/*, other*/) {
     let ln = arguments.length;
 
     if (ln < 2) {
@@ -201,7 +202,7 @@ flow.envList.resolveAppEnv = function resolveAppEnv() {
     || flow.gp.util.env.type
   ;
 
-  if(flow.envList.env && flow.envList.has(flow.envList.env)) {
+  if (flow.envList.env && flow.envList.has(flow.envList.env)) {
     return flow.envList;
   }
 
@@ -211,11 +212,11 @@ flow.envList.resolveAppEnv = function resolveAppEnv() {
 flow.envList.consolidate = function consolidate() {
   let current;
 
-  if(!flow.envList.env) {
+  if (!flow.envList.env) {
     flow.envList.resolveAppEnv();
   }
 
-  if(process && process.env) {
+  if (process && process.env) {
     current = flow.envList.envs[flow.envList.env];
     process.env.APP_ENV = current.APP_ENV;
     process.env.NODE_ENV = current.NODE_ENV;
