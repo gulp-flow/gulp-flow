@@ -25,6 +25,9 @@ let flow = {
     rootPath       : rootPath,
     pkg            : require(path.join(rootPath, 'package.json')),
     srcDir         : 'src',
+    get notSrcDir() {
+      return '!' + flow.cfg.srcDir;
+    },
     publicDir      : 'public',
     publicAssetsDir: 'public/assets',
     publicCssDir   : 'public/assets/css',
@@ -33,21 +36,14 @@ let flow = {
     distDir        : 'dist',
     patterns: {
       get ignore() {
-        let srcDir;
-
+        // if already memoized
         if (ignorePatterns) {
           return ignorePatterns;
         }
 
-        // init
-        srcDir = flow.cfg.srcDir;
-
+        // init / memoize
         ignorePatterns = [
-          '!' + srcDir + '/**/_*',
-          '!' + srcDir + '/**/_*/*',
-          '!' + srcDir + '/_*/',
-          '!' + srcDir + '/_*/**',
-          '!' + srcDir + '/_*/**/*'
+          flow.cfg.notSrcDir + '/**/*/_*/**/*'
         ];
 
         return ignorePatterns;
