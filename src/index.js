@@ -10,23 +10,42 @@
 
 'use strict';
 
-let filesSrc, customBanner, ignorePatterns;
+let filesSrc, customBanner, ignorePatterns, nodeModulesPath;
 let _ = require('lodash');
 let path = require('path');
 let EnvList = require('envlist');
 let rootPath = path.resolve();
-let nodeModulesPath = path.join(cfg.rootPath, 'node_modules');
 
 let flow = {
   envList: new EnvList(),
 
   cfg : {
     rootPath,
-    nodeModulesPath,
+    get nodeModulesPath() {
+      // if already memoized
+      if (nodeModulesPath) {
+        return nodeModulesPath;
+      }
+
+      // init / memoize
+      nodeModulesPath = path.join(flow.cfg.rootPath, 'node_modules');
+
+      return nodeModulesPath;
+    },
+    set nodeModulesPath(value) {
+      throw new Error(
+        'Cannot replace the "nodeModulesPath" value (it\'s based on "rootPath").'
+      );
+    },
     pkg            : require(path.join(rootPath, 'package.json')),
     srcDir         : 'src',
     get notSrcDir() {
       return '!' + flow.cfg.srcDir;
+    },
+    set notSrcDir(value) {
+      throw new Error(
+        'Cannot replace the "notSrcDir" value (it\'s the reverse of "srcDir").'
+      );
     },
     publicDir      : 'public',
     publicAssetsDir: 'public/assets',
