@@ -1,11 +1,12 @@
 # gulp-flow
 
-`gulp-flow` helps to organize and re-use a collection of tasks. This is the basic package to create a more sophisticated workflow.
+`gulp-flow` helps to organize and re-use a collection of tasks.
+This is the base package to create a more sophisticated workflow.
 
 
 ## Requirements
 
- * __>=__ Node v4 (v4 or +)
+ * __>=__ Node v6 (v6 or +)
  * __>=__ Gulp v4 (v4 or +)
 
 ## Install
@@ -52,7 +53,7 @@ let flow = require('gulp-flow');
 
 ### Command
 
-If you are a _Unix_ user, to be able to support natively the modern JS features (ES6 / ES7) in your tasks scripts (without transpiler), you can add in your `.bashrc` (or `.bash_aliases`) file this alias:
+If you are an _Unix_ user, to be able to support natively the modern JS features (ES6 / ES7) in your tasks scripts (without transpiler), you can add in your `.bashrc` (or `.bash_aliases`) file this alias:
 
 ```sh
 # run Gulp with some features of ES6/ES7
@@ -77,7 +78,7 @@ See [envlist](https://github.com/Nicolab/envlist) module for more details.
 ```sh
 gulp --type=dev
 ```
-or
+or (recommended way)
 ```sh
 APP_ENV=dev gulp
 ```
@@ -115,7 +116,7 @@ _TODO:_ bundles
 
 ### Utils
 
-_TODO:_ utils
+_TODO:_ `utils`
 
 ## LICENSE
 
