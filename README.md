@@ -57,7 +57,7 @@ If you are an _Unix_ user, to be able to support natively the modern JS features
 
 ```sh
 # run Gulp with some features of ES6/ES7
-alias gulp='node --es_staging --harmony_destructuring `which gulp`'
+alias gulp='node --es_staging `which gulp`'
 ```
 
 Now you can write the modern JS (supported by Node.js) in your _gulpfile.js_:
