@@ -62,7 +62,8 @@ let flow = {
 
         // init / memoize
         ignorePatterns = [
-          flow.cfg.notSrcDir + '/**/*/_*/**/*'
+          flow.cfg.notSrcDir + '/**/*/_*/**/*',
+          flow.cfg.notSrcDir + '/**/*/_*'
         ];
 
         return ignorePatterns;
