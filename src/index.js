@@ -10,19 +10,19 @@
 
 'use strict';
 
-let filesSrc, customBanner;
+let filesSrc, customBanner, ignorePatterns;
 let _ = require('lodash');
 let path = require('path');
 let EnvList = require('envlist');
 let rootPath = path.resolve();
-
-let ignorePatterns;
+let nodeModulesPath = path.join(cfg.rootPath, 'node_modules');
 
 let flow = {
   envList: new EnvList(),
 
   cfg : {
-    rootPath       : rootPath,
+    rootPath,
+    nodeModulesPath,
     pkg            : require(path.join(rootPath, 'package.json')),
     srcDir         : 'src',
     get notSrcDir() {
