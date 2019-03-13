@@ -13,32 +13,19 @@ This is the base package to create a more sophisticated workflow.
 
 `gulp-flow` requires _Gulp 4_.
 
-### Install Gulp 4 (if not already installed)
-
-If _Gulp 4_ is already installed, you can skip this step (go to [install gulp-flow](#install-gulp-flow)) :+1:
-
-#### Uninstall previous Gulp installation (if there is a Gulp installed less than v4)
+* Install Gulp 4 CLI tools globally:
 
 ```sh
-npm uninstall gulp -g
-cd [your_project_root]
-npm uninstall gulp
+npm install gulpjs/gulp-cli -g
 ```
 
-#### Install Gulp 4 CLI tools globally from 4.0 GitHub branch
+* Install Gulp 4 into your project:
 
 ```sh
-npm install gulpjs/gulp-cli#4.0 -g
+npm install --save-dev gulp
 ```
 
-#### Install Gulp 4 into your project
-
-```sh
-npm install --save-dev gulpjs/gulp.git#4.0
-```
-
-
-### Install Gulp flow
+* Install Gulp flow:
 
 ```sh
 npm install --save-dev gulp-flow
@@ -47,22 +34,11 @@ npm install --save-dev gulp-flow
 
 ## Usage
 
+_gulpfile.js_
+
 ```js
 let flow = require('gulp-flow');
-```
-
-### Command
-
-If you are an _Unix_ user, to be able to support natively the modern JS features (ES6 / ES7) in your tasks scripts (without transpiler), you can add in your `.bashrc` (or `.bash_aliases`) file this alias:
-
-```sh
-# run Gulp with some features of ES6/ES7
-alias gulp='node --es_staging `which gulp`'
-```
-
-Now you can write the modern JS (supported by Node.js) in your _gulpfile.js_:
-```js
-let {cfg, gp, pipes, utils, envList} = require('gulp-flow');
+let {cfg, gp, pipes, utils, envList} = flow;
 ```
 
 ### Config
@@ -75,14 +51,14 @@ _TODO:_ `cfg`
 
 See [envlist](https://github.com/Nicolab/envlist) module for more details.
 
-```sh
-gulp --type=dev
-```
-or (recommended way)
+Recommended way:
+
 ```sh
 APP_ENV=dev gulp
 ```
+
 or
+
 ```sh
 NODE_ENV=dev gulp
 ```
@@ -125,7 +101,7 @@ _TODO:_ `utils`
 
 ## Author
 
-| [![Nicolas Tallefourtane - Nicolab.net](http://www.gravatar.com/avatar/d7dd0f4769f3aa48a3ecb308f0b457fc?s=64)](http://nicolab.net) |
+| [![Nicolas Tallefourtane - Nicolab.net](https://www.gravatar.com/avatar/d7dd0f4769f3aa48a3ecb308f0b457fc?s=64)](https://nicolab.net) |
 |---|
-| [Nicolas Talle](http://nicolab.net) |
+| [Nicolas Talle](https://nicolab.net) |
 | [![Make a donation via Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PGRH4ZXP36GUC) |

@@ -139,8 +139,7 @@ let flow = {
     rename  : require('gulp-rename'),
     replace : require('gulp-replace'),
     newer   : require('gulp-newer'),
-    using   : require('gulp-using'),
-    util    : require('gulp-util')
+    using   : require('gulp-using')
   },
 
   // pipelines (lazypipe)
