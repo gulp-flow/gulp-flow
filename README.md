@@ -6,7 +6,7 @@ This is the base package to create a more sophisticated workflow.
 
 ## Requirements
 
- * __>=__ Node v6 (v6 or +)
+ * __>=__ Node v8 (v8 or +)
  * __>=__ Gulp v4 (v4 or +)
 
 ## Install
