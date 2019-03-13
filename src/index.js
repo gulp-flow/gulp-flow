@@ -212,10 +212,7 @@ _.mixin(
 \*----------------------------------------------------------------------------*/
 
 flow.envList.resolveAppEnv = function resolveAppEnv() {
-  flow.envList.env = process.env.APP_ENV
-    || process.env.NODE_ENV
-    || flow.gp.util.env.type
-  ;
+  flow.envList.env = process.env.APP_ENV || process.env.NODE_ENV;
 
   if (flow.envList.env && flow.envList.has(flow.envList.env)) {
     return flow.envList;
@@ -235,7 +232,6 @@ flow.envList.consolidate = function consolidate() {
     current = flow.envList.envs[flow.envList.env];
     process.env.APP_ENV = current.APP_ENV;
     process.env.NODE_ENV = current.NODE_ENV;
-    flow.gp.util.env.type = current.NODE_ENV;
   }
 
   return flow.envList;
